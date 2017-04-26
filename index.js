@@ -4,7 +4,6 @@ function marshal(model, fields) {
     let value = null;
     if (Object.getPrototypeOf(fields[key].constructor).name === 'RawField') {
       originalKey = fields[key].attribute ? fields[key].attribute : key;
-      console.log(originalKey)
       value = fields[key].output(model[originalKey])
     } else {
       value = model[key]
