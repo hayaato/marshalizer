@@ -1,13 +1,13 @@
 {
   "name": "marshalizer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "define what attribute of an object can be sent",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "marshalling"
+    "marshal, format output object"
   ],
   "author": "Joan Brugaya",
   "license": "ISC"
