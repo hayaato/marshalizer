@@ -1,12 +1,12 @@
 # Marshalizer
 
-### Introduction
+## Introduction
 Marshalizer provide an easy reusable way to format data you send for render.
 With Marshalizer, you can use any object (ORM models/custom classes/etc.).
 
 Thanks to the output_fields, you can define what attribute will be present in the returned object.
 
-### Example
+## Basic Usage
 
 ```javascript
 var marshalizer = require('marshalizer');
@@ -34,7 +34,16 @@ will return:
 {id: "47478fds4fd4s894fdszab8", name: 'Poney book'}
 ```
 
-### Define your own field
+## Renaming Attribute
+Because sometime, your sent data has not to be as the private data, you can define the public key of the object by giving the 'attribute' keyword
+```javascript
+book_output_fields = {
+    'id': marshalizer.field.String(),
+    'name': marshalizer.field.String({attribute: 'private_name'}),
+}
+```
+
+## Define your own field
 Your custom field must extends marshalizer.field.RawField
 
 #### Example
@@ -98,21 +107,3 @@ app.use('/books', function(req, res, next){
     /*
 });
 ```
-
-## Configuration
-
-You can give configurations to fields:
-```javascript
-var book_output_field = {
-    id: new marshalizer.field.StringField({attribute: 'new_id'}),
-    name: new marshalizer.field.StringField({defaultValue: 'no name given'}),
-    author: new marshalizer.field.NestedField({field: author_output_field})
-};
-```
-- attribute:
-        Above, will replace in the result object the key "id" by "new_id"
-- defaultValue
-        Above, if name is undefined, it will be filled with "no name giver"
-- field
-        Only used for NestedField, it define what output_field will be used to fill the nested object.
-

@@ -1,19 +1,15 @@
 function marshal(model, fields) {
   let output = {}
   for (const key in fields) {
-    if (key in model) {
-      let value = null;
-      let finalKey = key;
-      if (Object.getPrototypeOf(fields[key].constructor).name === 'RawField') {
-        value = fields[key].output(model[key])
-        finalKey = fields[key].getAttribute(key)
-      } else {
-        value = model[key]
-      }
-      output[finalKey] = value;
+    let value = null;
+    if (Object.getPrototypeOf(fields[key].constructor).name === 'RawField') {
+      originalKey = fields[key].attribute ? fields[key].attribute : key;
+      console.log(originalKey)
+      value = fields[key].output(model[originalKey])
     } else {
-      output[key] = null;
+      value = model[key]
     }
+    output[key] = value;
   }
 
   return output
@@ -59,6 +55,16 @@ class StringField extends RawField {
   }
 }
 
+class DefaultField extends RawField {
+  constructor(config) {
+    super(config);
+  }
+
+  output(data) {
+    return data ? data : this.defaultValue;
+  }
+}
+
 class NestedField extends RawField {
   constructor(config = {}) {
     super(config);
@@ -73,6 +79,7 @@ class NestedField extends RawField {
 module.exports.field = {
   RawField: RawField,
   StringField: StringField,
+  DefaultField: DefaultField,
   NestedField: NestedField
 };
 
