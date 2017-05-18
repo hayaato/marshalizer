@@ -60,7 +60,7 @@ class DefaultField extends RawField {
   }
 
   output(data) {
-    return data ? data : this.defaultValue;
+    return data !== undefined ? data : this.defaultValue;
   }
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "marshalizer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "define what attribute of an object can be sent",
   "main": "index.js",
   "scripts": {
