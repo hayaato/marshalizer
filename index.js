@@ -50,7 +50,7 @@ class StringField extends RawField {
   }
 
   output(data) {
-    return String(data ? data : this.defaultValue);
+    return data ? String(data) : this.defaultValue;
   }
 }
 
