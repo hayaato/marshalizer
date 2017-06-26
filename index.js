@@ -71,11 +71,7 @@ class NestedField extends RawField {
   }
 
   output(data) {
-    if (data)
-    {
-      return marshal_with(data, this.fields)
-    }
-    return null
+    return data ? marshal_with(data, this.fields) : this.defaultValue;
   }
 }
 
